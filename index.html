@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgb(43, 41, 41);
+      color: rgb(245, 235, 235);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+     
+     
+      top: 0;
+    }
+
+    nav h1 {
+      font-size: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links button {
+      padding: 10px 15px;
+      border: none;
+      background: rgb(245, 235, 235);
+      color: rgb(43, 41, 41);
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .nav-links button:hover {
+      background: #dbe8ff;
+    }
+
+    .search-box input {
+      padding: 10px;
+      width: 220px;
+      border: none;
+      border-radius: 5px;
+      
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      background: rgb(245, 235, 235);
+    }
+
+    .hero h2 {
+      font-size: 45px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .hero p {
+      color: #666;
+      font-size: 18px;
+    }
+
+    /* Books Section */
+    .books-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .book-card {
+      background: rgb(245, 235, 235);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      cursor: pointer;
+    
+    }
+
+    .book-card:hover {
+      transform: scale(1.05);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .book-info {
+      padding: 15px;
+      text-align: center;
+      transition: all 0.5s ease-in-out;
+     
+    }
+    .book-info:hover{
+      background-color:rgb(249, 222, 171);
+      opacity: 0.9;
+      box-shadow: 0px 0px 10px rgb(249, 222, 171);
+    }
+
+    .book-info h3 {
+      margin-bottom: 8px;
+      color: #333;
+      
+
+    .book-info p {
+      color: gray;
+    }
+
+    /* PDF Viewer */
+    .pdf-viewer {
+      display: none;
+      padding: 20px;
+    }
+    a{
+      color: rgb(43, 41, 41);
+      text-decoration: none;
+    }
+
+    .pdf-viewer iframe {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .back-btn {
+      padding: 10px 15px;
+      background: rgb(43, 41, 41);
+      color: rgb(245, 235, 235);
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background: rgb(43, 41, 41);
+      color: rgb(245, 235, 235);
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero h2 {
+        font-size: 32px;
+      }
+    }
+   
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>📚 Library</h1>
+
+    <div class="nav-links">
+      <button onclick="filterBooks('all')">All</button>
+     <a href="part2.html"> <button onclick="filterBooks('Islamic')">Islamic</button></a>
+     <a href="part4.html"> <button onclick="filterBooks('Novels')">Novels</button></a>
+     <a href="part5.html"> <button onclick="filterBooks('Story')">Story</button></a>
+      <a href="part6.html"><button onclick="filterBooks('Study')">Study</button></a>
+      <a href="part3.html"> <button onclick="filterBooks('Study')">Sports</button></a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search books..." onkeyup="searchBooks()">
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome To Online Library</h2>
+    <p>Read Islamic Books, Novels, Stories & Study Books Online.</p>
+  </section>
+
+  <!-- Books Section -->
+  <div class="books-container" id="booksContainer">
+
+    <!-- Islamic -->
+    <div class="book-card" data-category="Islamic" onclick="openPDF()">
+      <img src= "zakattttttt.jpg" alt="">
+      <div class="book-info">
+        <h3> <a href="Zakat al-fitr.pdf">Zakat Ul-Fitr</a></h3>
+        <p>Islamic</p>
+      </div>
+    </div>
+
+    <!-- Novel -->
+    <div class="book-card" data-category="Novels" onclick="openPDF()">
+      <img src="namal.webp" alt="">
+      <div class="book-info">
+        <h3> <a href="Namal novel by Nimra Ahmad.pdf">Namal</a></h3>
+        <p>Novels</p>
+      </div> 
+    </div>
+
+    <!-- Story -->
+    <div class="book-card" data-category="Story" onclick="openPDF()">
+      <img src="motu.jpg" alt="">
+      <div class="book-info">
+        <h3> <a href="patlu motu.pdf" ">Kids Story</a></h3>
+        <p>Story</p>
+      </div>
+    </div>
+
+    <!-- Study -->
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="IBA2.webp" alt="">
+      <div class="book-info">
+        <h3><a href="Sukkur_IBA_University_History.pdf" ">History of IBA SUKKUR</a></h3>
+        <p>Study</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="pic.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="ronaldo history.pdf">Ronaldo</a></h3>
+        <p>Sport</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="mesii...............webp" alt="">
+      <div class="book-info">
+        <h3><a href="Lionel_Messi_Poster.pdf">Messi</a></h3>
+        <p>Sports</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="karbla pic.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="Imam_Hussain_Karbala.pdf">Karbla</a></h3>
+        <p>Islamic</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="study1.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="study1.pdf">Motivation</a></h3>
+        <p>Study</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="story1.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="story1.pdf">Bill O'Neill</a></h3>
+        <p>Story</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="pedriiiiiii.webp" alt="">
+      <div class="book-info">
+        <h3><a href="pedri1.png">Pedri</a></h3>
+        <p>Sports</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="Muhammad.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="Life-of-Muhammad.pdf">Muhammad(saw)</a></h3>
+        <p>Islamic</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="jaun.jpg" alt="">
+      <div class="book-info">
+        <h3><a href="Shayad by Jon Elia.pdf">Jaun Elia</a></h3>
+        <p>Novels</p>
+      </div>
+    </div>
+    <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="madrid.png" alt="">
+      <div class="book-info">
+        <h3><a href="The Real Madrid Way PDF.pdf">Real Madrid</a></h3>
+        <p>Sports</p>
+      </div>
+    </div>
+     <div class="book-card" data-category="Study" onclick="openPDF()">
+      <img src="Barca.jpeg" alt="">
+      <div class="book-info">
+        <h3><a href="barca.pdf">Barcelona</a></h3>
+        <p>Sports</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Footer -->
+  <footer >
+    <p style="background-color: black; color: white; text-align: center; ">© 2026 Library Website | Designed By Mudassir</p>
+  </footer>
+
+
+
+</body>
+</html>
